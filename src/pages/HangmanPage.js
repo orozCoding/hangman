@@ -5,7 +5,7 @@ const HangmanPage = () => {
   return (
     <div>
       Hello from hangPage
-      <HangmanMatch word={'amigo'}/>
+      <HangmanMatch word={'mamita'} limit={5}/>
     </div>
   )
 }
