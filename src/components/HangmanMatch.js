@@ -150,7 +150,7 @@ const HangmanMatch = (props) => {
         )}
         <button
           onClick={restartGame}
-          class="text-white bg-blue-500 rounded-lg py-2 px-2 cursor-pointer hover:bg-blue-600 font-bold"
+          className="text-white bg-blue-500 rounded-lg py-2 px-2 cursor-pointer hover:bg-blue-600 font-bold"
         >
           New Game
         </button>

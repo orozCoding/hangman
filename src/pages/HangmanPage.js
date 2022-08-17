@@ -23,14 +23,14 @@ const HangmanPage = () => {
       {!ready && (
         <form
           onSubmit={handleSubmit}
-          class="flex flex-col text-centet gap-4 w-300"
+          className="flex flex-col text-centet gap-4 w-300"
         >
           <label>
             <input
               type="password"
               name="word"
               placeholder="Word"
-              class="text-center rounded border-b-2 border-blue-300 focus:outline-0"
+              className="text-center rounded border-b-2 border-blue-300 focus:outline-0"
             />
           </label>
           <label>
@@ -38,7 +38,7 @@ const HangmanPage = () => {
               type="number"
               name="limit"
               placeholder="Lives"
-              class="text-center rounded border-b-2 border-blue-300 focus:outline-0"
+              className="text-center rounded border-b-2 border-blue-300 focus:outline-0"
             />
           </label>
           <label>
@@ -46,13 +46,13 @@ const HangmanPage = () => {
               type="text"
               name="hint"
               placeholder="Hint"
-              class="text-center rounded border-b-2 border-blue-300 focus:outline-0"
+              className="text-center rounded border-b-2 border-blue-300 focus:outline-0"
             />
           </label>
           <input
             type="submit"
             value="Start Match"
-            class="text-white bg-blue-500 rounded-lg py-2 px-2 cursor-pointer hover:bg-blue-600 font-bold"
+            className="text-white bg-blue-500 rounded-lg py-2 px-2 cursor-pointer hover:bg-blue-600 font-bold"
           />
         </form>
       )}
