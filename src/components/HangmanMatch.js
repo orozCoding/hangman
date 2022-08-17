@@ -136,7 +136,6 @@ const HangmanMatch = (props) => {
                     You completed the word with <strong>no strikes!</strong>
                   </p>
                 )}
-                <button onClick={restartGame}>New Game</button>
               </div>
             )}
           </div>
@@ -147,9 +146,14 @@ const HangmanMatch = (props) => {
             <p>
               The word was <strong>{word}</strong>
             </p>
-            <button onClick={restartGame}>New Game</button>
           </div>
         )}
+        <button
+          onClick={restartGame}
+          class="text-white bg-blue-500 rounded-lg py-2 px-2 cursor-pointer hover:bg-blue-600 font-bold"
+        >
+          New Game
+        </button>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import HangmanMatch from "../components/HangmanMatch";
+import "./HangmanPage.css";
 
 const HangmanPage = () => {
   const [ready, setReady] = useState(false);
@@ -17,26 +18,43 @@ const HangmanPage = () => {
   };
 
   return (
-    <div>
-      Hello from hangPagedd
+    <div class="flex flex-col gap-3 w-full items-center">
+      Configura la partida:
       {!ready && (
-        <div>
-          <form onSubmit={handleSubmit}>
-            <label>
-              Word:
-              <input type="text" name="word" />
-            </label>
-            <label>
-              Lives:
-              <input type="number" name="limit" />
-            </label>
-            <label>
-              Hint:
-              <input type="text" name="hint" />
-            </label>
-            <input type="submit" value="Submit" />
-          </form>
-        </div>
+        <form
+          onSubmit={handleSubmit}
+          class="flex flex-col text-centet gap-4 w-300"
+        >
+          <label>
+            <input
+              type="password"
+              name="word"
+              placeholder="Word"
+              class="text-center rounded border-b-2 border-blue-300 focus:outline-0"
+            />
+          </label>
+          <label>
+            <input
+              type="number"
+              name="limit"
+              placeholder="Lives"
+              class="text-center rounded border-b-2 border-blue-300 focus:outline-0"
+            />
+          </label>
+          <label>
+            <input
+              type="text"
+              name="hint"
+              placeholder="Hint"
+              class="text-center rounded border-b-2 border-blue-300 focus:outline-0"
+            />
+          </label>
+          <input
+            type="submit"
+            value="Start Match"
+            class="text-white bg-blue-500 rounded-lg py-2 px-2 cursor-pointer hover:bg-blue-600 font-bold"
+          />
+        </form>
       )}
       {ready && (
         <HangmanMatch
