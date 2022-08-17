@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 
 const HangmanMatch = (props) => {
-  const { word, limit, hint, setReady } = props;
+  const { word, lives, hint, setReady } = props;
   const [tries, setTries] = useState(0);
   const [board, setBoard] = useState([]);
   const [completed, setCompleted] = useState(false);
-  const [hp, setHp] = useState(limit);
+  const [hp, setHp] = useState(lives);
   const [used, setUsed] = useState([]);
   const [error, setError] = useState("Go for it!");
 
@@ -23,8 +23,8 @@ const HangmanMatch = (props) => {
   }, [word]);
 
   useEffect(() => {
-    setHp(limit - tries);
-  }, [tries, limit]);
+    setHp(lives - tries);
+  }, [tries, lives]);
 
   useEffect(() => {
     if (board.indexOf("_") !== -1) {
@@ -51,7 +51,7 @@ const HangmanMatch = (props) => {
   };
 
   const checkError = (letter) => {
-    if (letter === "" || /\d/.test(letter)) {
+    if (letter === "" || !/[A-zÁ-ú]/.test(letter)) {
       setError("Submit a letter");
       return true;
     } else if (board.indexOf(letter) !== -1 || used.indexOf(letter) !== -1) {

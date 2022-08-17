@@ -4,7 +4,7 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App flex h-screen">
       <HangmanPage />
     </div>
   );
