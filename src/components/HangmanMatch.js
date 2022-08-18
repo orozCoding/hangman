@@ -123,7 +123,7 @@ const HangmanMatch = (props) => {
 
   return (
     <div>
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-6 items-center">
         {hp > 0 && (
           <div className="flex flex-col gap-6">
             {!completed && (
@@ -173,7 +173,7 @@ const HangmanMatch = (props) => {
         )}
         <button
           onClick={restartGame}
-          className="text-white bg-yellow-800 rounded-lg py-2 px-2 cursor-pointer hover:bg-yellow-900 font-bold"
+          className="text-white bg-yellow-800 rounded-lg py-2 px-2 cursor-pointer hover:bg-yellow-900 font-bold w-32"
         >
           Nuevo juego
         </button>
