@@ -96,6 +96,14 @@ const HangmanMatch = (props) => {
     setReady(false);
   };
 
+  const renderHearts = () => {
+    let hearts = [];
+    for (let i = hp; i > 0; i--) {
+      hearts.push(<span key={i}>❤️</span>);
+    }
+    return hearts.map((h) => h);
+  };
+
   return (
     <div>
       <div>
@@ -112,7 +120,9 @@ const HangmanMatch = (props) => {
                   <p>Escribe una letra:</p>
                   {renderForm()}
                   {error && <p>{error}</p>}
-                  <div>Lives: {hp}</div>
+                  <div>
+                    Lives: <ul>{renderHearts()}</ul>
+                  </div>
                   {used.length > 0 && (
                     <div>
                       <p>Wrong letters:</p>
