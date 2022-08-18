@@ -11,19 +11,25 @@ const HangmanPage = () => {
 
   const checkErrors = (word, hint, lives) => {
     let foundErrors = false;
+    let newErrors = { word: "", hint: "", lives: "" };
+    setErrors(newErrors);
 
-    if (word.length < 2) {
-      setErrors({ ...errors, word: "La palabra necesita al menos 2 letras" });
+    if (word.length < 2 || word.length > 23) {
+      newErrors.word = "La palabra  debe tener entre 2 y 23 letras";
+      setErrors(newErrors);
       foundErrors = true;
     }
 
     if (word.length > 1 && /[^A-zÁ-ù]/.test(word)) {
-      setErrors({ ...errors, word: "Usa solo letras para la palabra" });
+      newErrors.word =
+        "Usa solo letras para la palabra (Sin símbolos o espacios)";
+      setErrors(newErrors);
       foundErrors = true;
     }
 
     if (hint.length < 1 || hint.length > 30) {
-      setErrors({ ...errors, hint: "La pista debe tener entre 1 y 30 letras" });
+      newErrors.hint = "La pista debe tener entre 1 y 30 letras";
+      setErrors(newErrors);
       foundErrors = true;
     }
 
@@ -32,7 +38,6 @@ const HangmanPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors({ word: "", hint: "", lives: "" });
     const { word, lives, hint } = e.target;
 
     if (!checkErrors(word.value.toUpperCase(), hint.value, lives.value)) {
@@ -46,13 +51,13 @@ const HangmanPage = () => {
   return (
     <div className="flex flex-col gap-3 w-full items-center m-auto">
       <h1 className="text-xl font-bold">EL AHORCADO</h1>
-      <h2>Configura la partida:</h2>
+      {!ready && <h2>Configura la partida:</h2>}
       {!ready && (
         <form
           onSubmit={handleSubmit}
           className="flex flex-col text-centet gap-4 w-300 items-center"
         >
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 items-center">
             {errors.word && (
               <p className="italic text-sm text-red-500">{errors.word}</p>
             )}
@@ -60,10 +65,10 @@ const HangmanPage = () => {
               type="password"
               name="word"
               placeholder="Palabra"
-              className="text-center rounded border-b-2 border-blue-300 focus:outline-0"
+              className="text-center rounded border-b-2 border-blue-300 focus:outline-0 w-44"
             />
           </div>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 items-center">
             {errors.hint && (
               <p className="italic text-sm text-red-500">{errors.hint}</p>
             )}
@@ -71,7 +76,7 @@ const HangmanPage = () => {
               type="text"
               name="hint"
               placeholder="Pista"
-              className="text-center rounded border-b-2 border-blue-300 focus:outline-0"
+              className="text-center rounded border-b-2 border-blue-300 focus:outline-0 w-44"
             />
           </div>
           <div>
