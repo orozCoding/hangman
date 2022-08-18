@@ -22,14 +22,20 @@ const HangmanPage = () => {
       foundErrors = true;
     }
 
+    if (hint.length < 1 || hint.length > 30) {
+      setErrors({ ...errors, hint: "La pista debe tener entre 1 y 30 letras" });
+      foundErrors = true;
+    }
+
     return foundErrors;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setErrors({ word: "", hint: "", lives: "" });
     const { word, lives, hint } = e.target;
 
-    if (!checkErrors(word.value.toUpperCase(), lives.value, hint.value)) {
+    if (!checkErrors(word.value.toUpperCase(), hint.value, lives.value)) {
       setWord(word.value.toUpperCase());
       setLives(lives.value);
       setHint(hint.value);
@@ -46,34 +52,44 @@ const HangmanPage = () => {
           onSubmit={handleSubmit}
           className="flex flex-col text-centet gap-4 w-300 items-center"
         >
-          <div>
-            {errors.word && <p>{errors.word}</p>}
+          <div className="flex flex-col gap-2">
+            {errors.word && (
+              <p className="italic text-sm text-red-500">{errors.word}</p>
+            )}
             <input
               type="password"
               name="word"
-              placeholder="Word"
+              placeholder="Palabra"
               className="text-center rounded border-b-2 border-blue-300 focus:outline-0"
             />
           </div>
-          <div>
+          <div className="flex flex-col gap-2">
+            {errors.hint && (
+              <p className="italic text-sm text-red-500">{errors.hint}</p>
+            )}
             <input
               type="text"
               name="hint"
-              placeholder="Hint"
+              placeholder="Pista"
               className="text-center rounded border-b-2 border-blue-300 focus:outline-0"
             />
           </div>
           <div>
-            <input
-              type="number"
-              name="lives"
-              placeholder="Lives"
-              className="text-center rounded border-b-2 border-blue-300 focus:outline-0"
-            />
+            <label className="flex justify-center items-center gap-5">
+              <p>Vidas:</p>
+              <select
+                name="lives"
+                className="px-3 py-1 border-2 border-blue-300 cursor-pointer focus:outline-0"
+              >
+                <option value="3">3</option>
+                <option value="5">5</option>
+                <option value="7">7</option>
+              </select>
+            </label>
           </div>
           <input
             type="submit"
-            value="Start Match"
+            value="Empezar"
             className="text-white bg-blue-500 rounded-lg py-2 px-2 cursor-pointer hover:bg-blue-600 font-bold w-40"
           />
           <p className="w-80 text-sm italic text-gray-500">
