@@ -7,7 +7,9 @@ const HangmanMatch = (props) => {
   const [completed, setCompleted] = useState(false);
   const [hp, setHp] = useState(lives);
   const [used, setUsed] = useState([]);
-  const [error, setError] = useState("Go for it!");
+  const [error, setError] = useState(
+    <p className="text-black font-bold">Go for it!</p>
+  );
 
   const createBoard = (word) => {
     let newBoard = [];
@@ -74,7 +76,7 @@ const HangmanMatch = (props) => {
 
     if (checkLetter(letter)) {
       setCorrect(letter);
-      setError("Correct!");
+      setError(<p className="text-green-600 font-bold">Correct!</p>);
     } else {
       setTries(tries + 1);
       setUsed([...used, letter]);
@@ -84,10 +86,25 @@ const HangmanMatch = (props) => {
 
   const renderForm = () => {
     return (
-      <form autoComplete="off" onSubmit={handleSubmit}>
-        <input type="text" id="hm-match-letter" name="letter" />
-        <br />
-        <input type="submit" />
+      <form
+        autoComplete="off"
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4 items-center"
+      >
+        <p>Escribe una letra:</p>
+        <input
+          type="text"
+          id="hm-match-letter"
+          name="letter"
+          placeholder="?"
+          maxLength={1}
+          className="text-center rounded border-b-2 border-blue-300 focus:outline-0 w-20"
+        />
+        <input
+          type="submit"
+          value="Probar"
+          className="text-white bg-blue-500 rounded-lg py-2 px-3 cursor-pointer hover:bg-blue-600 font-bold"
+        />
       </form>
     );
   };
@@ -106,44 +123,40 @@ const HangmanMatch = (props) => {
 
   return (
     <div>
-      <div>
+      <div className="flex flex-col gap-6">
         {hp > 0 && (
-          <div>
-            <p>Adivina la palabra:</p>
-            <p style={{ fontSize: "30px" }}>{board && board.join(" ")}</p>
-            <p>
-              Pista: <strong>{hint}</strong>
-            </p>
-            <div>
-              {!completed && (
-                <div>
-                  <p>Escribe una letra:</p>
-                  {renderForm()}
-                  {error && <p>{error}</p>}
-                  <div>
-                    Lives: <ul>{renderHearts()}</ul>
-                  </div>
-                  {used.length > 0 && (
-                    <div>
-                      <p>Wrong letters:</p>
-                      <p>{used.join(",")}</p>
-                    </div>
-                  )}
+          <div className="flex flex-col gap-6">
+            {!completed && (
+              <div className="flex flex-col gap-5">
+                <p>Adivina la palabra:</p>
+                <p className="text-3xl">{board && board.join(" ")}</p>
+                {error && <p className="text-red-600 font-bold">{error}</p>}
+                <div className="flex justify-center items-center gap-1">
+                  <p>Vidas: </p> <ul>{renderHearts()}</ul>
                 </div>
-              )}
-            </div>
-
+                <p>
+                  Pista: <strong>{hint}</strong>
+                </p>
+                {renderForm()}
+                {used.length > 0 && (
+                  <div>
+                    <p>Letras usadas:</p>
+                    <p className="text-red-600 font-bold">{used.join(", ")}</p>
+                  </div>
+                )}
+              </div>
+            )}
             {completed && (
               <div>
-                <p>Congratulations!</p>
+                <p>¡Felicidades!</p>
                 {tries > 0 ? (
                   <p>
-                    You completed the word with{" "}
-                    <strong>{`${tries} strikes`}</strong>
+                    Completaste la palabra con{" "}
+                    <strong>{`${tries} fallos`}</strong>
                   </p>
                 ) : (
                   <p>
-                    You completed the word with <strong>no strikes!</strong>
+                    ¡Completaste la palabra <strong>sin fallos!</strong>
                   </p>
                 )}
               </div>
@@ -152,17 +165,17 @@ const HangmanMatch = (props) => {
         )}
         {hp <= 0 && (
           <div>
-            <p>You lost</p>
+            <p>¡Perdiste!</p>
             <p>
-              The word was <strong>{word}</strong>
+              La palabra era <strong>{word}</strong>
             </p>
           </div>
         )}
         <button
           onClick={restartGame}
-          className="text-white bg-blue-500 rounded-lg py-2 px-2 cursor-pointer hover:bg-blue-600 font-bold"
+          className="text-white bg-yellow-800 rounded-lg py-2 px-2 cursor-pointer hover:bg-yellow-900 font-bold"
         >
-          New Game
+          Nuevo juego
         </button>
       </div>
     </div>
