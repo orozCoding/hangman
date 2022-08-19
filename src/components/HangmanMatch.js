@@ -147,7 +147,8 @@ const HangmanMatch = (props) => {
               </div>
             )}
             {completed && (
-              <div>
+              <div className="flex flex-col items-center gap-4 mt-2">
+                <p className="text-3xl">{board && board.join(" ")}</p>
                 <p>¡Felicidades!</p>
                 {tries > 0 ? (
                   <p>
@@ -164,7 +165,8 @@ const HangmanMatch = (props) => {
           </div>
         )}
         {hp <= 0 && (
-          <div>
+          <div className="flex flex-col items-center gap-4 mt-2">
+            <p className="text-3xl">{board && board.join(" ")}</p>
             <p>¡Perdiste!</p>
             <p>
               La palabra era <strong>{word}</strong>
